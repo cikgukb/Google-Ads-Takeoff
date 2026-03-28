@@ -623,35 +623,56 @@ document.addEventListener('keydown', (e) => {
     }
 });
 
-// Submit feedback form
+// ===== GOOGLE SHEET WEB APP URL =====
+// IMPORTANT: Replace this URL with your own Google Apps Script Web App URL
+const GOOGLE_SHEET_URL = 'YOUR_GOOGLE_APPS_SCRIPT_URL_HERE';
+
+// Submit feedback form to Google Sheet
 document.getElementById('feedback-form').addEventListener('submit', (e) => {
     e.preventDefault();
+
+    const btn = document.getElementById('btn-submit-feedback');
+    const origText = btn.textContent;
 
     const name = document.getElementById('fb-name').value.trim();
     const phone = document.getElementById('fb-phone').value.trim();
     const email = document.getElementById('fb-email').value.trim();
     const details = document.getElementById('fb-details').value.trim();
 
-    const subject = encodeURIComponent('[Google Ads Takeoff] Aduan / Maklum Balas dari ' + name);
-    const body = encodeURIComponent(
-        `Nama: ${name}\n` +
-        `Nombor Telefon: ${phone}\n` +
-        `Emel: ${email}\n\n` +
-        `Butiran Aduan / Maklum Balas:\n${details}`
-    );
-
-    window.location.href = `mailto:kbcimb@gmail.com?subject=${subject}&body=${body}`;
-
-    // Show confirmation
-    const btn = document.getElementById('btn-submit-feedback');
-    const origText = btn.textContent;
-    btn.textContent = currentLang === 'EN' ? '✅ Thank you!' : '✅ Terima kasih!';
+    // Show loading state
+    btn.textContent = currentLang === 'EN' ? '⏳ Sending...' : '⏳ Menghantar...';
     btn.disabled = true;
 
-    setTimeout(() => {
-        btn.textContent = origText;
-        btn.disabled = false;
-        document.getElementById('feedback-form').reset();
-        closeFeedbackModal();
-    }, 3000);
+    const formData = new FormData();
+    formData.append('nama', name);
+    formData.append('telefon', phone);
+    formData.append('emel', email);
+    formData.append('butiran', details);
+
+    fetch(GOOGLE_SHEET_URL, {
+        method: 'POST',
+        body: formData
+    })
+    .then(res => res.json())
+    .then(data => {
+        if (data.result === 'success') {
+            btn.textContent = currentLang === 'EN' ? '✅ Sent successfully!' : '✅ Berjaya dihantar!';
+            document.getElementById('feedback-form').reset();
+            setTimeout(() => {
+                btn.textContent = origText;
+                btn.disabled = false;
+                closeFeedbackModal();
+            }, 2500);
+        } else {
+            throw new Error('Submission failed');
+        }
+    })
+    .catch(err => {
+        console.error('Feedback error:', err);
+        btn.textContent = currentLang === 'EN' ? '❌ Failed. Try again.' : '❌ Gagal. Cuba lagi.';
+        setTimeout(() => {
+            btn.textContent = origText;
+            btn.disabled = false;
+        }, 2500);
+    });
 });
