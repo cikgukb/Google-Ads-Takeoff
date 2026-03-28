@@ -625,7 +625,7 @@ document.addEventListener('keydown', (e) => {
 
 // ===== GOOGLE SHEET WEB APP URL =====
 // IMPORTANT: Replace this URL with your own Google Apps Script Web App URL
-const GOOGLE_SHEET_URL = 'YOUR_GOOGLE_APPS_SCRIPT_URL_HERE';
+const GOOGLE_SHEET_URL = 'https://script.google.com/macros/s/AKfycbzPiEOPCH7dwr293vi19zRi27JWO1hcKQiqnDIMzg3gserITHdDDh1BZSggJQS5oDnH/exec';
 
 // Submit feedback form to Google Sheet
 document.getElementById('feedback-form').addEventListener('submit', (e) => {
