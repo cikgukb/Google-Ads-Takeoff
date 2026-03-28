@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Google Ads Copy Generator</title>
+    <title>Google Ads Takeoff</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="index.css">
 </head>
@@ -21,103 +21,235 @@
             </div>
         </header>
 
-        <main class="main-content">
-            <!-- Left Panel: Form -->
-            <section class="form-panel glass">
-                <h2 id="form-heading">Ad Components</h2>
-                
-                <!-- Policy Guidelines Box -->
-                <div class="policy-box">
-                    <h3 id="policy-title">⚠️ Google Ads Policy Guidelines</h3>
-                    <ul>
-                        <li id="policy-1">❌ No excessive capitalization (e.g. "FREE", "BUY").</li>
-                        <li id="policy-2">❌ No excessive punctuation (e.g. "Buy here!!!", "Promo???").</li>
-                        <li id="policy-3">❌ No unsupported claims (e.g. "#1", "Best") without proof.</li>
-                        <li id="policy-4">❌ No phone numbers in ad text (use Call Assets instead).</li>
-                        <li id="policy-5">❌ No gimmicky spelling (e.g. "C l e a r a n c e").</li>
-                    </ul>
-                </div>
+        <!-- Tab Navigation -->
+        <div class="tabs glass">
+            <button id="tab-btn-copy" class="tab-btn active" data-tab="tab-copy">
+                <span class="tab-icon">📝</span>
+                <span id="tab-label-copy">Ad Copy Generator</span>
+            </button>
+            <button id="tab-btn-budget" class="tab-btn" data-tab="tab-budget">
+                <span class="tab-icon">🧮</span>
+                <span id="tab-label-budget">Budget Calculator</span>
+            </button>
+        </div>
 
-                <form id="ad-form">
+        <!-- TAB 1: Ad Copy Generator -->
+        <div id="tab-copy" class="tab-content active">
+            <main class="main-content">
+                <!-- Left Panel: Form -->
+                <section class="form-panel glass">
+                    <h2 id="form-heading">Ad Components</h2>
                     
-                    <!-- URL Section -->
-                    <div class="form-group">
-                        <label for="final-url" id="lbl-final-url">Final URL</label>
-                        <input type="url" id="final-url" placeholder="https://www.example.com">
-                        <div class="hint" id="hint-final-url">Where people go after clicking your ad.</div>
+                    <!-- Policy Guidelines Box -->
+                    <div class="policy-box">
+                        <h3 id="policy-title">⚠️ Google Ads Policy Guidelines</h3>
+                        <ul>
+                            <li id="policy-1">❌ No excessive capitalization (e.g. "FREE", "BUY").</li>
+                            <li id="policy-2">❌ No excessive punctuation (e.g. "Buy here!!!", "Promo???").</li>
+                            <li id="policy-3">❌ No unsupported claims (e.g. "#1", "Best") without proof.</li>
+                            <li id="policy-4">❌ No phone numbers in ad text (use Call Assets instead).</li>
+                            <li id="policy-5">❌ No gimmicky spelling (e.g. "C l e a r a n c e").</li>
+                        </ul>
                     </div>
 
-                    <div class="form-row">
-                        <div class="form-group half">
-                            <label for="path-1" id="lbl-path-1">Path 1 <span class="char-count" id="count-path-1">0/15</span></label>
-                            <input type="text" id="path-1" maxlength="15" placeholder="Sale">
+                    <form id="ad-form">
+                        
+                        <!-- URL Section -->
+                        <div class="form-group">
+                            <label for="final-url" id="lbl-final-url">Final URL</label>
+                            <input type="url" id="final-url" placeholder="https://www.example.com">
+                            <div class="hint" id="hint-final-url">Where people go after clicking your ad.</div>
                         </div>
-                        <div class="form-group half">
-                            <label for="path-2" id="lbl-path-2">Path 2 <span class="char-count" id="count-path-2">0/15</span></label>
-                            <input type="text" id="path-2" maxlength="15" placeholder="Promo">
-                        </div>
-                    </div>
 
-                    <!-- Headlines Section -->
-                    <div class="form-group">
-                        <label for="headline-1" id="lbl-headline-1">Headline 1 <span class="char-count" id="count-headline-1">0/30</span></label>
-                        <input type="text" id="headline-1" maxlength="30" placeholder="Premium Shoes Online">
-                        <div class="hint tipped" id="hint-headline-1">Tip: Include exact numbers or your main keyword.</div>
-                    </div>
+                        <div class="form-row">
+                            <div class="form-group half">
+                                <label for="path-1" id="lbl-path-1">Path 1 <span class="char-count" id="count-path-1">0/15</span></label>
+                                <input type="text" id="path-1" maxlength="15" placeholder="Sale">
+                            </div>
+                            <div class="form-group half">
+                                <label for="path-2" id="lbl-path-2">Path 2 <span class="char-count" id="count-path-2">0/15</span></label>
+                                <input type="text" id="path-2" maxlength="15" placeholder="Promo">
+                            </div>
+                        </div>
+
+                        <!-- Headlines Section -->
+                        <div class="form-group">
+                            <label for="headline-1" id="lbl-headline-1">Headline 1 <span class="char-count" id="count-headline-1">0/30</span></label>
+                            <input type="text" id="headline-1" maxlength="30" placeholder="Premium Shoes Online">
+                            <div class="hint tipped" id="hint-headline-1">Tip: Include exact numbers or your main keyword.</div>
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="headline-2" id="lbl-headline-2">Headline 2 <span class="char-count" id="count-headline-2">0/30</span></label>
+                            <input type="text" id="headline-2" maxlength="30" placeholder="Save 20% Today">
+                            <div class="hint tipped" id="hint-headline-2">Tip: Trigger FOMO or highlight a specific promotion.</div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="headline-3" id="lbl-headline-3">Headline 3 <span class="char-count" id="count-headline-3">0/30</span></label>
+                            <input type="text" id="headline-3" maxlength="30" placeholder="Free Shipping">
+                            <div class="hint tipped" id="hint-headline-3">Tip: Guide with a Call-To-Action (CTA) or unique benefit.</div>
+                        </div>
+
+                        <!-- Descriptions Section -->
+                        <div class="form-group">
+                            <label for="desc-1" id="lbl-desc-1">Description 1 <span class="char-count" id="count-desc-1">0/90</span></label>
+                            <textarea id="desc-1" maxlength="90" rows="2" placeholder="Discover the best premium shoes. Shop our exclusive collection and elevate your style."></textarea>
+                            <div class="hint tipped" id="hint-desc-1">Tip: Be customer-focused and address their main objections.</div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="desc-2" id="lbl-desc-2">Description 2 <span class="char-count" id="count-desc-2">0/90</span></label>
+                            <textarea id="desc-2" maxlength="90" rows="2" placeholder="Limited time offer. Get 20% off your first order plus free shipping on all items."></textarea>
+                            <div class="hint tipped" id="hint-desc-2">Tip: Use strong verbs and proper punctuation (Title Case) to stand out.</div>
+                        </div>
+
+                    </form>
                     
-                    <div class="form-group">
-                        <label for="headline-2" id="lbl-headline-2">Headline 2 <span class="char-count" id="count-headline-2">0/30</span></label>
-                        <input type="text" id="headline-2" maxlength="30" placeholder="Save 20% Today">
-                        <div class="hint tipped" id="hint-headline-2">Tip: Trigger FOMO or highlight a specific promotion.</div>
+                    <div class="action-buttons">
+                        <button id="btn-copy" class="primary-btn">Copy Ad Text</button>
+                        <button id="btn-clear" class="secondary-btn">Clear All</button>
+                    </div>
+                </section>
+
+                <!-- Right Panel: Preview -->
+                <section class="preview-panel">
+                    <h2 id="preview-heading">Live Preview</h2>
+                    
+                    <div class="ad-preview desktop-preview">
+                        <!-- Google Search Ad mockup layout -->
+                        <div class="ad-top">
+                            <span class="ad-badge">Ad</span>
+                            <span class="ad-url" id="prev-url">www.example.com</span>
+                            <span class="ad-path" id="prev-path"></span>
+                        </div>
+                        <div class="ad-headlines">
+                            <a href="#" class="ad-title" id="prev-headlines">Premium Shoes Online | Save 20% Today | Free Shipping</a>
+                        </div>
+                        <div class="ad-description">
+                            <span id="prev-descriptions">Discover the best premium shoes. Shop our exclusive collection and elevate your style. Limited time offer. Get 20% off your first order.</span>
+                        </div>
+                    </div>
+                </section>
+            </main>
+        </div>
+
+        <!-- TAB 2: Budget Calculator -->
+        <div id="tab-budget" class="tab-content">
+            <section class="budget-panel glass">
+                <h2 id="budget-heading">📊 Budget Calculator</h2>
+                <p class="budget-desc" id="budget-desc">Estimate your monthly and daily Google Ads budget based on your campaign goals.</p>
+
+                <div class="budget-layout">
+                    <!-- Left: Inputs -->
+                    <div class="budget-form">
+                        <!-- Campaign Type -->
+                        <div class="form-group">
+                            <label for="campaign-type" id="lbl-campaign-type">Campaign Type</label>
+                            <select id="campaign-type">
+                                <option value="search">🔍 Search Ads</option>
+                                <option value="display">🖼️ Display Ads</option>
+                            </select>
+                            <div class="hint" id="hint-campaign-type">Search = high-intent clicks. Display = wider reach & branding.</div>
+                        </div>
+
+                        <!-- Calculation Goal -->
+                        <div class="form-group">
+                            <label for="calc-goal" id="lbl-calc-goal">Calculation Goal</label>
+                            <select id="calc-goal">
+                                <option value="clicks">🎯 Target Clicks</option>
+                                <option value="conversions">💰 Target Conversions</option>
+                            </select>
+                            <div class="hint" id="hint-calc-goal">Choose whether you want to calculate by traffic volume or conversions.</div>
+                        </div>
+
+                        <!-- Target Number -->
+                        <div class="form-group">
+                            <label for="target-number" id="lbl-target-number">Target Clicks / Month</label>
+                            <input type="number" id="target-number" min="1" placeholder="500" value="500">
+                            <div class="hint" id="hint-target-number">How many clicks (or conversions) you want per month.</div>
+                        </div>
+
+                        <!-- Estimated CPC -->
+                        <div class="form-group">
+                            <label for="est-cpc" id="lbl-est-cpc">Estimated CPC (RM)</label>
+                            <input type="number" id="est-cpc" min="0.01" step="0.01" placeholder="1.50" value="1.50">
+                            <div class="hint" id="hint-est-cpc">Use Google Keyword Planner to estimate your CPC.</div>
+                        </div>
+
+                        <!-- Conversion Rate (hidden by default) -->
+                        <div class="form-group" id="cvr-group" style="display:none;">
+                            <label for="conv-rate" id="lbl-conv-rate">Conversion Rate (%)</label>
+                            <input type="number" id="conv-rate" min="0.1" step="0.1" placeholder="3" value="3">
+                            <div class="hint" id="hint-conv-rate">Industry average: Search ~3-5%, Display ~0.5-1%.</div>
+                        </div>
+
+                        <button id="btn-calculate" class="primary-btn" style="width:100%;margin-top:1rem;">📊 Calculate Budget</button>
                     </div>
 
-                    <div class="form-group">
-                        <label for="headline-3" id="lbl-headline-3">Headline 3 <span class="char-count" id="count-headline-3">0/30</span></label>
-                        <input type="text" id="headline-3" maxlength="30" placeholder="Free Shipping">
-                        <div class="hint tipped" id="hint-headline-3">Tip: Guide with a Call-To-Action (CTA) or unique benefit.</div>
-                    </div>
+                    <!-- Right: Results -->
+                    <div class="budget-results">
+                        <div class="result-card glass">
+                            <h3 id="result-title">💡 Estimated Budget</h3>
+                            
+                            <div class="result-row">
+                                <span class="result-label" id="res-lbl-monthly">Monthly Budget</span>
+                                <span class="result-value" id="res-monthly">RM 750.00</span>
+                            </div>
+                            <div class="result-row">
+                                <span class="result-label" id="res-lbl-daily">Daily Budget</span>
+                                <span class="result-value" id="res-daily">RM 24.67</span>
+                            </div>
+                            <div class="result-row">
+                                <span class="result-label" id="res-lbl-clicks">Est. Clicks / Month</span>
+                                <span class="result-value" id="res-clicks">500</span>
+                            </div>
+                            <div class="result-row" id="res-conv-row" style="display:none;">
+                                <span class="result-label" id="res-lbl-conv">Est. Conversions / Month</span>
+                                <span class="result-value" id="res-conv">—</span>
+                            </div>
+                        </div>
 
-                    <!-- Descriptions Section -->
-                    <div class="form-group">
-                        <label for="desc-1" id="lbl-desc-1">Description 1 <span class="char-count" id="count-desc-1">0/90</span></label>
-                        <textarea id="desc-1" maxlength="90" rows="2" placeholder="Discover the best premium shoes. Shop our exclusive collection and elevate your style."></textarea>
-                        <div class="hint tipped" id="hint-desc-1">Tip: Be customer-focused and address their main objections.</div>
-                    </div>
+                        <!-- Benchmark Info -->
+                        <div class="benchmark-card glass">
+                            <h3 id="benchmark-title">📌 Industry Benchmarks</h3>
+                            <div class="benchmark-grid">
+                                <div class="benchmark-item">
+                                    <span class="benchmark-label">Search CPC</span>
+                                    <span class="benchmark-value" id="bench-search-cpc">RM 1.00 – 5.00</span>
+                                </div>
+                                <div class="benchmark-item">
+                                    <span class="benchmark-label">Display CPC</span>
+                                    <span class="benchmark-value" id="bench-display-cpc">RM 0.20 – 1.00</span>
+                                </div>
+                                <div class="benchmark-item">
+                                    <span class="benchmark-label">Search CVR</span>
+                                    <span class="benchmark-value" id="bench-search-cvr">3% – 5%</span>
+                                </div>
+                                <div class="benchmark-item">
+                                    <span class="benchmark-label">Display CVR</span>
+                                    <span class="benchmark-value" id="bench-display-cvr">0.5% – 1%</span>
+                                </div>
+                            </div>
+                        </div>
 
-                    <div class="form-group">
-                        <label for="desc-2" id="lbl-desc-2">Description 2 <span class="char-count" id="count-desc-2">0/90</span></label>
-                        <textarea id="desc-2" maxlength="90" rows="2" placeholder="Limited time offer. Get 20% off your first order plus free shipping on all items."></textarea>
-                        <div class="hint tipped" id="hint-desc-2">Tip: Use strong verbs and proper punctuation (Title Case) to stand out.</div>
+                        <!-- Formula Info -->
+                        <div class="formula-card glass">
+                            <h3 id="formula-title">📐 Formulas Used</h3>
+                            <div class="formula-item" id="formula-clicks-text">
+                                <strong>Clicks:</strong> Budget = Target Clicks × CPC
+                            </div>
+                            <div class="formula-item" id="formula-conv-text">
+                                <strong>Conversions:</strong> Budget = (Target Conversions ÷ CVR) × CPC
+                            </div>
+                            <div class="formula-item" id="formula-daily-text">
+                                <strong>Daily:</strong> Monthly Budget ÷ 30.4
+                            </div>
+                        </div>
                     </div>
-
-                </form>
-                
-                <div class="action-buttons">
-                    <button id="btn-copy" class="primary-btn">Copy Ad Text</button>
-                    <button id="btn-clear" class="secondary-btn">Clear All</button>
                 </div>
             </section>
-
-            <!-- Right Panel: Preview -->
-            <section class="preview-panel">
-                <h2 id="preview-heading">Live Preview</h2>
-                
-                <div class="ad-preview desktop-preview">
-                    <!-- Google Search Ad mockup layout -->
-                    <div class="ad-top">
-                        <span class="ad-badge">Ad</span>
-                        <span class="ad-url" id="prev-url">www.example.com</span>
-                        <span class="ad-path" id="prev-path"></span>
-                    </div>
-                    <div class="ad-headlines">
-                        <a href="#" class="ad-title" id="prev-headlines">Premium Shoes Online | Save 20% Today | Free Shipping</a>
-                    </div>
-                    <div class="ad-description">
-                        <span id="prev-descriptions">Discover the best premium shoes. Shop our exclusive collection and elevate your style. Limited time offer. Get 20% off your first order.</span>
-                    </div>
-                </div>
-            </section>
-        </main>
+        </div>
 
         <!-- Footer -->
         <footer class="footer glass">

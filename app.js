@@ -36,7 +36,39 @@ const dict = {
         policy2: "❌ No excessive punctuation (e.g. \"Buy here!!!\", \"Promo???\").",
         policy3: "❌ No unsupported claims (e.g. \"#1\", \"Best\") without proof.",
         policy4: "❌ No phone numbers in ad text (use Call Assets instead).",
-        policy5: "❌ No gimmicky spelling (e.g. \"C l e a r a n c e\")."
+        policy5: "❌ No gimmicky spelling (e.g. \"C l e a r a n c e\").",
+        // Tab labels
+        tabCopy: "Ad Copy Generator",
+        tabBudget: "Budget Calculator",
+        // Budget Calculator
+        budgetHeading: "📊 Budget Calculator",
+        budgetDesc: "Estimate your monthly and daily Google Ads budget based on your campaign goals.",
+        lblCampaignType: "Campaign Type",
+        hintCampaignType: "Search = high-intent clicks. Display = wider reach & branding.",
+        optSearch: "🔍 Search Ads",
+        optDisplay: "🖼️ Display Ads",
+        lblCalcGoal: "Calculation Goal",
+        hintCalcGoal: "Choose whether you want to calculate by traffic volume or conversions.",
+        optClicks: "🎯 Target Clicks",
+        optConversions: "💰 Target Conversions",
+        lblTargetNumber: "Target Clicks / Month",
+        lblTargetConv: "Target Conversions / Month",
+        hintTargetNumber: "How many clicks (or conversions) you want per month.",
+        lblEstCpc: "Estimated CPC (RM)",
+        hintEstCpc: "Use Google Keyword Planner to estimate your CPC.",
+        lblConvRate: "Conversion Rate (%)",
+        hintConvRate: "Industry average: Search ~3-5%, Display ~0.5-1%.",
+        btnCalculate: "📊 Calculate Budget",
+        resultTitle: "💡 Estimated Budget",
+        resLblMonthly: "Monthly Budget",
+        resLblDaily: "Daily Budget",
+        resLblClicks: "Est. Clicks / Month",
+        resLblConv: "Est. Conversions / Month",
+        benchmarkTitle: "📌 Industry Benchmarks",
+        formulaTitle: "📐 Formulas Used",
+        formulaClicks: "Budget = Target Clicks × CPC",
+        formulaConv: "Budget = (Target Conversions ÷ CVR) × CPC",
+        formulaDaily: "Monthly Budget ÷ 30.4"
     },
     MS: {
         appTitle: "Penjana Teks Iklan Google",
@@ -75,7 +107,39 @@ const dict = {
         policy2: "❌ Dilarang tanda baca berlebihan (cth: \"Beli di sini!!!\").",
         policy3: "❌ Tiada dakwaan tidak berasas (cth: \"#1\", \"Terbaik\") tanpa pengesahan pihak ketiga.",
         policy4: "❌ Jangan letak nombor telefon dalam teks (guna Aset Panggilan).",
-        policy5: "❌ Tiada ejaan pelik / jarak tidak wajar (cth: \"M u r a h\")."
+        policy5: "❌ Tiada ejaan pelik / jarak tidak wajar (cth: \"M u r a h\").",
+        // Tab labels
+        tabCopy: "Penjana Teks Iklan",
+        tabBudget: "Kalkulator Bajet",
+        // Budget Calculator
+        budgetHeading: "📊 Kalkulator Bajet",
+        budgetDesc: "Anggarkan bajet bulanan dan harian Google Ads berdasarkan matlamat kempen anda.",
+        lblCampaignType: "Jenis Kempen",
+        hintCampaignType: "Search = klik niat tinggi. Display = jangkauan luas & penjenamaan.",
+        optSearch: "🔍 Iklan Carian",
+        optDisplay: "🖼️ Iklan Paparan",
+        lblCalcGoal: "Matlamat Pengiraan",
+        hintCalcGoal: "Pilih sama ada anda mahu mengira berdasarkan volum trafik atau penukaran.",
+        optClicks: "🎯 Sasaran Klik",
+        optConversions: "💰 Sasaran Penukaran",
+        lblTargetNumber: "Sasaran Klik / Bulan",
+        lblTargetConv: "Sasaran Penukaran / Bulan",
+        hintTargetNumber: "Berapa banyak klik (atau penukaran) yang anda mahu setiap bulan.",
+        lblEstCpc: "Anggaran CPC (RM)",
+        hintEstCpc: "Gunakan Google Keyword Planner untuk menganggarkan CPC anda.",
+        lblConvRate: "Kadar Penukaran (%)",
+        hintConvRate: "Purata industri: Search ~3-5%, Display ~0.5-1%.",
+        btnCalculate: "📊 Kira Bajet",
+        resultTitle: "💡 Anggaran Bajet",
+        resLblMonthly: "Bajet Bulanan",
+        resLblDaily: "Bajet Harian",
+        resLblClicks: "Angg. Klik / Bulan",
+        resLblConv: "Angg. Penukaran / Bulan",
+        benchmarkTitle: "📌 Penanda Aras Industri",
+        formulaTitle: "📐 Formula Digunakan",
+        formulaClicks: "Bajet = Sasaran Klik × CPC",
+        formulaConv: "Bajet = (Sasaran Penukaran ÷ CVR) × CPC",
+        formulaDaily: "Bajet Bulanan ÷ 30.4"
     }
 };
 
@@ -238,10 +302,140 @@ function switchLang(lang) {
     document.getElementById('policy-4').textContent = dict[lang].policy4;
     document.getElementById('policy-5').textContent = dict[lang].policy5;
 
+    // update tab labels
+    document.getElementById('tab-label-copy').textContent = dict[lang].tabCopy;
+    document.getElementById('tab-label-budget').textContent = dict[lang].tabBudget;
+
+    // update budget calculator
+    document.getElementById('budget-heading').textContent = dict[lang].budgetHeading;
+    document.getElementById('budget-desc').textContent = dict[lang].budgetDesc;
+    document.getElementById('lbl-campaign-type').textContent = dict[lang].lblCampaignType;
+    document.getElementById('hint-campaign-type').textContent = dict[lang].hintCampaignType;
+    document.getElementById('lbl-calc-goal').textContent = dict[lang].lblCalcGoal;
+    document.getElementById('hint-calc-goal').textContent = dict[lang].hintCalcGoal;
+    document.getElementById('hint-target-number').textContent = dict[lang].hintTargetNumber;
+    document.getElementById('lbl-est-cpc').textContent = dict[lang].lblEstCpc;
+    document.getElementById('hint-est-cpc').textContent = dict[lang].hintEstCpc;
+    document.getElementById('lbl-conv-rate').textContent = dict[lang].lblConvRate;
+    document.getElementById('hint-conv-rate').textContent = dict[lang].hintConvRate;
+    document.getElementById('btn-calculate').textContent = dict[lang].btnCalculate;
+    document.getElementById('result-title').textContent = dict[lang].resultTitle;
+    document.getElementById('res-lbl-monthly').textContent = dict[lang].resLblMonthly;
+    document.getElementById('res-lbl-daily').textContent = dict[lang].resLblDaily;
+    document.getElementById('res-lbl-clicks').textContent = dict[lang].resLblClicks;
+    document.getElementById('res-lbl-conv').textContent = dict[lang].resLblConv;
+    document.getElementById('benchmark-title').textContent = dict[lang].benchmarkTitle;
+    document.getElementById('formula-title').textContent = dict[lang].formulaTitle;
+
+    // update select options
+    const ctOpts = document.getElementById('campaign-type').options;
+    ctOpts[0].text = dict[lang].optSearch;
+    ctOpts[1].text = dict[lang].optDisplay;
+    const cgOpts = document.getElementById('calc-goal').options;
+    cgOpts[0].text = dict[lang].optClicks;
+    cgOpts[1].text = dict[lang].optConversions;
+
+    // update target label based on current goal
+    updateTargetLabel();
+
     updatePreview();
 }
 
-// Buttons
+// ==================== TAB SWITCHING ====================
+document.querySelectorAll('.tab-btn').forEach(btn => {
+    btn.addEventListener('click', () => {
+        // Remove active from all tabs and content
+        document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+        document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
+
+        // Add active to clicked
+        btn.classList.add('active');
+        const targetId = btn.getAttribute('data-tab');
+        document.getElementById(targetId).classList.add('active');
+    });
+});
+
+// ==================== BUDGET CALCULATOR ====================
+const calcGoalSelect = document.getElementById('calc-goal');
+const campaignTypeSelect = document.getElementById('campaign-type');
+const cvrGroup = document.getElementById('cvr-group');
+const convRateInput = document.getElementById('conv-rate');
+const targetNumberInput = document.getElementById('target-number');
+const estCpcInput = document.getElementById('est-cpc');
+
+function updateTargetLabel() {
+    const goal = calcGoalSelect.value;
+    const lbl = document.getElementById('lbl-target-number');
+    if (goal === 'clicks') {
+        lbl.textContent = dict[currentLang].lblTargetNumber;
+    } else {
+        lbl.textContent = dict[currentLang].lblTargetConv;
+    }
+}
+
+// Show/hide conversion rate based on goal
+calcGoalSelect.addEventListener('change', () => {
+    if (calcGoalSelect.value === 'conversions') {
+        cvrGroup.style.display = 'block';
+        document.getElementById('res-conv-row').style.display = 'flex';
+    } else {
+        cvrGroup.style.display = 'none';
+        document.getElementById('res-conv-row').style.display = 'none';
+    }
+    updateTargetLabel();
+});
+
+// Auto-fill CPC defaults when campaign type changes
+campaignTypeSelect.addEventListener('change', () => {
+    if (campaignTypeSelect.value === 'search') {
+        estCpcInput.value = '1.50';
+        convRateInput.value = '3';
+    } else {
+        estCpcInput.value = '0.50';
+        convRateInput.value = '0.7';
+    }
+});
+
+function calculateBudget() {
+    const goal = calcGoalSelect.value;
+    const target = parseFloat(targetNumberInput.value) || 0;
+    const cpc = parseFloat(estCpcInput.value) || 0;
+    const cvr = parseFloat(convRateInput.value) || 1;
+
+    let monthlyBudget = 0;
+    let clicks = 0;
+    let conversions = 0;
+
+    if (goal === 'clicks') {
+        // Budget = Target Clicks × CPC
+        clicks = target;
+        monthlyBudget = target * cpc;
+    } else {
+        // Budget = (Target Conversions / CVR) × CPC
+        conversions = target;
+        clicks = Math.ceil(target / (cvr / 100));
+        monthlyBudget = clicks * cpc;
+    }
+
+    const dailyBudget = monthlyBudget / 30.4;
+
+    document.getElementById('res-monthly').textContent = 'RM ' + monthlyBudget.toFixed(2);
+    document.getElementById('res-daily').textContent = 'RM ' + dailyBudget.toFixed(2);
+    document.getElementById('res-clicks').textContent = clicks.toLocaleString();
+    document.getElementById('res-conv').textContent = conversions > 0 ? conversions.toLocaleString() : '—';
+}
+
+document.getElementById('btn-calculate').addEventListener('click', (e) => {
+    e.preventDefault();
+    calculateBudget();
+});
+
+// Also auto-calculate on input change for real-time feedback
+[targetNumberInput, estCpcInput, convRateInput].forEach(el => {
+    el.addEventListener('input', calculateBudget);
+});
+
+// ==================== AD COPY BUTTONS ====================
 document.getElementById('btn-clear').addEventListener('click', (e) => {
     e.preventDefault();
     Object.keys(inputs).forEach(key => inputs[key].value = '');
@@ -276,3 +470,4 @@ Descriptions:
 // Init
 updateCounts();
 updatePreview();
+calculateBudget();
