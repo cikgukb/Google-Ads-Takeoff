@@ -417,6 +417,18 @@ select option {
     margin-bottom: 2rem;
 }
 
+.industry-cpc-info {
+    margin-top: 0.5rem;
+    padding: 0.6rem 1rem;
+    background: rgba(52, 211, 153, 0.1);
+    border: 1px solid rgba(52, 211, 153, 0.25);
+    border-radius: 8px;
+    font-size: 0.85rem;
+    color: #6ee7b7;
+    font-weight: 500;
+    animation: fadeIn 0.3s ease;
+}
+
 .budget-layout {
     display: grid;
     grid-template-columns: 1fr 1fr;

@@ -68,7 +68,21 @@ const dict = {
         formulaTitle: "📐 Formulas Used",
         formulaClicks: "Budget = Target Clicks × CPC",
         formulaConv: "Budget = (Target Conversions ÷ CVR) × CPC",
-        formulaDaily: "Monthly Budget ÷ 30.4"
+        formulaDaily: "Monthly Budget ÷ 30.4",
+        // Industry guide
+        lblIndustryType: "📋 Industry CPC Guide (Malaysia)",
+        hintIndustryType: "Select your industry to auto-fill the estimated CPC.",
+        optSelectIndustry: "— Select your industry —",
+        optFood: "🍱 Ready-to-Eat Product / F&B",
+        optRealEstate: "🏠 Real Estate Negotiator",
+        optInsurance: "🛡️ Insurance Agent",
+        optUnitTrust: "📈 Unit Trust Agent",
+        optHomestay: "🏡 Homestay Operator",
+        optCarWorkshop: "🔧 Car Workshop",
+        optTailor: "🧵 Tailor",
+        optBoutique: "👗 Fashion Boutique",
+        optBarber: "💈 Barber Shop",
+        optTuition: "📚 Tuition Centre"
     },
     MS: {
         appTitle: "Penjana Teks Iklan Google",
@@ -139,7 +153,21 @@ const dict = {
         formulaTitle: "📐 Formula Digunakan",
         formulaClicks: "Bajet = Sasaran Klik × CPC",
         formulaConv: "Bajet = (Sasaran Penukaran ÷ CVR) × CPC",
-        formulaDaily: "Bajet Bulanan ÷ 30.4"
+        formulaDaily: "Bajet Bulanan ÷ 30.4",
+        // Industry guide
+        lblIndustryType: "📋 Panduan CPC Mengikut Industri (Malaysia)",
+        hintIndustryType: "Pilih industri anda untuk auto-isi anggaran CPC.",
+        optSelectIndustry: "— Pilih industri anda —",
+        optFood: "🍱 Produk Ready-to-Eat / F&B",
+        optRealEstate: "🏠 Perunding Hartanah",
+        optInsurance: "🛡️ Ejen Insurans",
+        optUnitTrust: "📈 Ejen Unit Amanah",
+        optHomestay: "🏡 Peniaga Homestay",
+        optCarWorkshop: "🔧 Bengkel Kereta",
+        optTailor: "🧵 Tukang Jahit",
+        optBoutique: "👗 Butik Fesyen",
+        optBarber: "💈 Kedai Barber",
+        optTuition: "📚 Kelas Tuisyen"
     }
 };
 
@@ -335,6 +363,22 @@ function switchLang(lang) {
     cgOpts[0].text = dict[lang].optClicks;
     cgOpts[1].text = dict[lang].optConversions;
 
+    // update industry guide
+    document.getElementById('lbl-industry-type').textContent = dict[lang].lblIndustryType;
+    document.getElementById('hint-industry-type').textContent = dict[lang].hintIndustryType;
+    const indOpts = document.getElementById('industry-type').options;
+    indOpts[0].text = dict[lang].optSelectIndustry;
+    indOpts[1].text = dict[lang].optFood;
+    indOpts[2].text = dict[lang].optRealEstate;
+    indOpts[3].text = dict[lang].optInsurance;
+    indOpts[4].text = dict[lang].optUnitTrust;
+    indOpts[5].text = dict[lang].optHomestay;
+    indOpts[6].text = dict[lang].optCarWorkshop;
+    indOpts[7].text = dict[lang].optTailor;
+    indOpts[8].text = dict[lang].optBoutique;
+    indOpts[9].text = dict[lang].optBarber;
+    indOpts[10].text = dict[lang].optTuition;
+
     // update target label based on current goal
     updateTargetLabel();
 
@@ -362,6 +406,39 @@ const cvrGroup = document.getElementById('cvr-group');
 const convRateInput = document.getElementById('conv-rate');
 const targetNumberInput = document.getElementById('target-number');
 const estCpcInput = document.getElementById('est-cpc');
+const industrySelect = document.getElementById('industry-type');
+const industryCpcInfo = document.getElementById('industry-cpc-info');
+const industryCpcRange = document.getElementById('industry-cpc-range');
+
+// Industry CPC data for Malaysia (based on market research)
+const industryCpcData = {
+    custom:       { cpc: null,  range: '' },
+    food:         { cpc: 1.50,  range: 'RM 1.00 – 3.00 (avg RM 1.50)' },
+    realestate:   { cpc: 8.00,  range: 'RM 5.00 – 25.00 (avg RM 8.00)' },
+    insurance:    { cpc: 10.00, range: 'RM 8.00 – 25.00 (avg RM 10.00)' },
+    unittrust:    { cpc: 8.00,  range: 'RM 5.00 – 20.00 (avg RM 8.00)' },
+    homestay:     { cpc: 2.50,  range: 'RM 1.00 – 6.00 (avg RM 2.50)' },
+    carworkshop:  { cpc: 2.00,  range: 'RM 1.00 – 5.00 (avg RM 2.00)' },
+    tailor:       { cpc: 1.50,  range: 'RM 0.80 – 3.00 (avg RM 1.50)' },
+    boutique:     { cpc: 2.00,  range: 'RM 1.00 – 5.00 (avg RM 2.00)' },
+    barber:       { cpc: 1.50,  range: 'RM 0.80 – 3.00 (avg RM 1.50)' },
+    tuition:      { cpc: 3.50,  range: 'RM 2.00 – 8.00 (avg RM 3.50)' }
+};
+
+// Industry selector logic
+industrySelect.addEventListener('change', () => {
+    const selected = industrySelect.value;
+    const data = industryCpcData[selected];
+
+    if (selected !== 'custom' && data) {
+        estCpcInput.value = data.cpc;
+        industryCpcRange.textContent = '💡 CPC range: ' + data.range;
+        industryCpcInfo.style.display = 'block';
+        calculateBudget();
+    } else {
+        industryCpcInfo.style.display = 'none';
+    }
+});
 
 function updateTargetLabel() {
     const goal = calcGoalSelect.value;
@@ -387,6 +464,9 @@ calcGoalSelect.addEventListener('change', () => {
 
 // Auto-fill CPC defaults when campaign type changes
 campaignTypeSelect.addEventListener('change', () => {
+    // Reset industry selector when type changes
+    industrySelect.value = 'custom';
+    industryCpcInfo.style.display = 'none';
     if (campaignTypeSelect.value === 'search') {
         estCpcInput.value = '1.50';
         convRateInput.value = '3';
