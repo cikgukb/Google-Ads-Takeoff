@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Google Ads Copy Generator</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="index.css">
+</head>
+<body>
+    <div class="app-container">
+        <!-- Header -->
+        <header class="header glass">
+            <div>
+                <h1 id="app-title">Google Ads Copy Generator</h1>
+                <p id="app-subtitle" class="subtitle">Draft high-converting ads effortlessly.</p>
+            </div>
+            <div class="lang-toggle">
+                <button id="btn-en" class="lang-btn active">EN</button>
+                <button id="btn-ms" class="lang-btn">MS</button>
+            </div>
+        </header>
+
+        <main class="main-content">
+            <!-- Left Panel: Form -->
+            <section class="form-panel glass">
+                <h2 id="form-heading">Ad Components</h2>
+                
+                <!-- Policy Guidelines Box -->
+                <div class="policy-box">
+                    <h3 id="policy-title">⚠️ Google Ads Policy Guidelines</h3>
+                    <ul>
+                        <li id="policy-1">❌ No excessive capitalization (e.g. "FREE", "BUY").</li>
+                        <li id="policy-2">❌ No excessive punctuation (e.g. "Buy here!!!", "Promo???").</li>
+                        <li id="policy-3">❌ No unsupported claims (e.g. "#1", "Best") without proof.</li>
+                        <li id="policy-4">❌ No phone numbers in ad text (use Call Assets instead).</li>
+                        <li id="policy-5">❌ No gimmicky spelling (e.g. "C l e a r a n c e").</li>
+                    </ul>
+                </div>
+
+                <form id="ad-form">
+                    
+                    <!-- URL Section -->
+                    <div class="form-group">
+                        <label for="final-url" id="lbl-final-url">Final URL</label>
+                        <input type="url" id="final-url" placeholder="https://www.example.com">
+                        <div class="hint" id="hint-final-url">Where people go after clicking your ad.</div>
+                    </div>
+
+                    <div class="form-row">
+                        <div class="form-group half">
+                            <label for="path-1" id="lbl-path-1">Path 1 <span class="char-count" id="count-path-1">0/15</span></label>
+                            <input type="text" id="path-1" maxlength="15" placeholder="Sale">
+                        </div>
+                        <div class="form-group half">
+                            <label for="path-2" id="lbl-path-2">Path 2 <span class="char-count" id="count-path-2">0/15</span></label>
+                            <input type="text" id="path-2" maxlength="15" placeholder="Promo">
+                        </div>
+                    </div>
+
+                    <!-- Headlines Section -->
+                    <div class="form-group">
+                        <label for="headline-1" id="lbl-headline-1">Headline 1 <span class="char-count" id="count-headline-1">0/30</span></label>
+                        <input type="text" id="headline-1" maxlength="30" placeholder="Premium Shoes Online">
+                        <div class="hint tipped" id="hint-headline-1">Tip: Include exact numbers or your main keyword.</div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label for="headline-2" id="lbl-headline-2">Headline 2 <span class="char-count" id="count-headline-2">0/30</span></label>
+                        <input type="text" id="headline-2" maxlength="30" placeholder="Save 20% Today">
+                        <div class="hint tipped" id="hint-headline-2">Tip: Trigger FOMO or highlight a specific promotion.</div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="headline-3" id="lbl-headline-3">Headline 3 <span class="char-count" id="count-headline-3">0/30</span></label>
+                        <input type="text" id="headline-3" maxlength="30" placeholder="Free Shipping">
+                        <div class="hint tipped" id="hint-headline-3">Tip: Guide with a Call-To-Action (CTA) or unique benefit.</div>
+                    </div>
+
+                    <!-- Descriptions Section -->
+                    <div class="form-group">
+                        <label for="desc-1" id="lbl-desc-1">Description 1 <span class="char-count" id="count-desc-1">0/90</span></label>
+                        <textarea id="desc-1" maxlength="90" rows="2" placeholder="Discover the best premium shoes. Shop our exclusive collection and elevate your style."></textarea>
+                        <div class="hint tipped" id="hint-desc-1">Tip: Be customer-focused and address their main objections.</div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="desc-2" id="lbl-desc-2">Description 2 <span class="char-count" id="count-desc-2">0/90</span></label>
+                        <textarea id="desc-2" maxlength="90" rows="2" placeholder="Limited time offer. Get 20% off your first order plus free shipping on all items."></textarea>
+                        <div class="hint tipped" id="hint-desc-2">Tip: Use strong verbs and proper punctuation (Title Case) to stand out.</div>
+                    </div>
+
+                </form>
+                
+                <div class="action-buttons">
+                    <button id="btn-copy" class="primary-btn">Copy Ad Text</button>
+                    <button id="btn-clear" class="secondary-btn">Clear All</button>
+                </div>
+            </section>
+
+            <!-- Right Panel: Preview -->
+            <section class="preview-panel">
+                <h2 id="preview-heading">Live Preview</h2>
+                
+                <div class="ad-preview desktop-preview">
+                    <!-- Google Search Ad mockup layout -->
+                    <div class="ad-top">
+                        <span class="ad-badge">Ad</span>
+                        <span class="ad-url" id="prev-url">www.example.com</span>
+                        <span class="ad-path" id="prev-path"></span>
+                    </div>
+                    <div class="ad-headlines">
+                        <a href="#" class="ad-title" id="prev-headlines">Premium Shoes Online | Save 20% Today | Free Shipping</a>
+                    </div>
+                    <div class="ad-description">
+                        <span id="prev-descriptions">Discover the best premium shoes. Shop our exclusive collection and elevate your style. Limited time offer. Get 20% off your first order.</span>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <!-- Footer -->
+        <footer class="footer glass">
+            <div class="footer-content">
+                <img src="cikgukb.png" alt="CikguKB Avatar" class="footer-avatar" onerror="this.src='data:image/svg+xml;utf8,<svg xmlns=\'http://www.w3.org/2000/svg\' width=\'60\' height=\'60\'><circle cx=\'30\' cy=\'30\' r=\'30\' fill=\'%23555\'/></svg>'">
+                <div class="footer-text">
+                    <p><span id="ftr-built">Sistem ini dibina secara eksklusif oleh</span> <strong>CikguKB</strong></p>
+                    <p><a href="https://cikgukb.my" target="_blank" rel="noopener">@CikguKB</a></p>
+                    <p class="footer-desc" id="ftr-desc">Sekiranya berminat untuk kerjasama mahupun ingin menyalurkan sumbangan (donation) tanda sokongan terhadap projek ini, sila berbuat demikian di bawah:</p>
+                    <a href="https://kbbeyondcreativesdnbhd.bcl.my/form/tabung-sokong-agar-cikgukb-terus-berkarya" target="_blank" rel="noopener" class="donate-btn" id="ftr-donate">💰 Tabung Pembangunan Projek CikguKB</a>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
