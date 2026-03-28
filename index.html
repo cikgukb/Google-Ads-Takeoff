@@ -284,7 +284,39 @@
                     <a href="https://kbbeyondcreativesdnbhd.bcl.my/form/tabung-sokong-agar-cikgukb-terus-berkarya" target="_blank" rel="noopener" class="donate-btn" id="ftr-donate">💰 Tabung Pembangunan Projek CikguKB</a>
                 </div>
             </div>
+            <div class="feedback-link">
+                <a href="#" id="open-feedback" onclick="openFeedbackModal(); return false;">📩 <span id="ftr-feedback-link">Aduan & Maklum Balas</span></a>
+            </div>
         </footer>
+    </div>
+
+    <!-- Feedback Modal -->
+    <div id="feedback-modal" class="modal-overlay" style="display:none;">
+        <div class="modal-content glass">
+            <button class="modal-close" id="close-feedback" onclick="closeFeedbackModal()">✕</button>
+            <h2 id="modal-title">📩 Aduan & Maklum Balas</h2>
+            <p class="modal-desc" id="modal-desc">Sila isi borang di bawah untuk menyampaikan aduan atau cadangan penambahbaikan.</p>
+
+            <form id="feedback-form">
+                <div class="form-group">
+                    <label for="fb-name" id="lbl-fb-name">Nama</label>
+                    <input type="text" id="fb-name" required placeholder="Nama penuh anda">
+                </div>
+                <div class="form-group">
+                    <label for="fb-phone" id="lbl-fb-phone">Nombor Telefon</label>
+                    <input type="tel" id="fb-phone" required placeholder="012-3456789">
+                </div>
+                <div class="form-group">
+                    <label for="fb-email" id="lbl-fb-email">Emel</label>
+                    <input type="email" id="fb-email" required placeholder="contoh@email.com">
+                </div>
+                <div class="form-group">
+                    <label for="fb-details" id="lbl-fb-details">Butiran Aduan / Maklum Balas</label>
+                    <textarea id="fb-details" rows="4" required placeholder="Sila nyatakan butiran aduan atau cadangan anda di sini..."></textarea>
+                </div>
+                <button type="submit" id="btn-submit-feedback" class="primary-btn" style="width:100%;">📨 Hantar Maklum Balas</button>
+            </form>
+        </div>
     </div>
 
     <script src="app.js"></script>

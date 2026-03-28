@@ -82,7 +82,21 @@ const dict = {
         optTailor: "🧵 Tailor",
         optBoutique: "👗 Fashion Boutique",
         optBarber: "💈 Barber Shop",
-        optTuition: "📚 Tuition Centre"
+        optTuition: "📚 Tuition Centre",
+        // Feedback modal
+        ftrFeedbackLink: "Complaints & Feedback",
+        modalTitle: "📩 Complaints & Feedback",
+        modalDesc: "Please fill in the form below to submit your complaint or suggestion for improvement.",
+        lblFbName: "Name",
+        plFbName: "Your full name",
+        lblFbPhone: "Phone Number",
+        plFbPhone: "012-3456789",
+        lblFbEmail: "Email",
+        plFbEmail: "example@email.com",
+        lblFbDetails: "Complaint / Feedback Details",
+        plFbDetails: "Please describe your complaint or suggestion here...",
+        btnSubmitFeedback: "📨 Submit Feedback",
+        feedbackSent: "Thank you! Your email client will open shortly."
     },
     MS: {
         appTitle: "Penjana Teks Iklan Google",
@@ -167,7 +181,21 @@ const dict = {
         optTailor: "🧵 Tukang Jahit",
         optBoutique: "👗 Butik Fesyen",
         optBarber: "💈 Kedai Barber",
-        optTuition: "📚 Kelas Tuisyen"
+        optTuition: "📚 Kelas Tuisyen",
+        // Feedback modal
+        ftrFeedbackLink: "Aduan & Maklum Balas",
+        modalTitle: "📩 Aduan & Maklum Balas",
+        modalDesc: "Sila isi borang di bawah untuk menyampaikan aduan atau cadangan penambahbaikan.",
+        lblFbName: "Nama",
+        plFbName: "Nama penuh anda",
+        lblFbPhone: "Nombor Telefon",
+        plFbPhone: "012-3456789",
+        lblFbEmail: "Emel",
+        plFbEmail: "contoh@email.com",
+        lblFbDetails: "Butiran Aduan / Maklum Balas",
+        plFbDetails: "Sila nyatakan butiran aduan atau cadangan anda di sini...",
+        btnSubmitFeedback: "📨 Hantar Maklum Balas",
+        feedbackSent: "Terima kasih! Klien emel anda akan dibuka sebentar lagi."
     }
 };
 
@@ -382,6 +410,9 @@ function switchLang(lang) {
     // update target label based on current goal
     updateTargetLabel();
 
+    // update feedback link
+    document.getElementById('ftr-feedback-link').textContent = dict[lang].ftrFeedbackLink;
+
     updatePreview();
 }
 
@@ -551,3 +582,76 @@ Descriptions:
 updateCounts();
 updatePreview();
 calculateBudget();
+
+// ==================== FEEDBACK MODAL ====================
+function openFeedbackModal() {
+    const modal = document.getElementById('feedback-modal');
+    modal.style.display = 'flex';
+    document.body.style.overflow = 'hidden';
+
+    // Update modal texts to current language
+    document.getElementById('modal-title').textContent = dict[currentLang].modalTitle;
+    document.getElementById('modal-desc').textContent = dict[currentLang].modalDesc;
+    document.getElementById('lbl-fb-name').textContent = dict[currentLang].lblFbName;
+    document.getElementById('fb-name').placeholder = dict[currentLang].plFbName;
+    document.getElementById('lbl-fb-phone').textContent = dict[currentLang].lblFbPhone;
+    document.getElementById('fb-phone').placeholder = dict[currentLang].plFbPhone;
+    document.getElementById('lbl-fb-email').textContent = dict[currentLang].lblFbEmail;
+    document.getElementById('fb-email').placeholder = dict[currentLang].plFbEmail;
+    document.getElementById('lbl-fb-details').textContent = dict[currentLang].lblFbDetails;
+    document.getElementById('fb-details').placeholder = dict[currentLang].plFbDetails;
+    document.getElementById('btn-submit-feedback').textContent = dict[currentLang].btnSubmitFeedback;
+}
+
+function closeFeedbackModal() {
+    const modal = document.getElementById('feedback-modal');
+    modal.style.display = 'none';
+    document.body.style.overflow = '';
+}
+
+// Close modal when clicking outside
+document.getElementById('feedback-modal').addEventListener('click', (e) => {
+    if (e.target === e.currentTarget) {
+        closeFeedbackModal();
+    }
+});
+
+// Close modal with Escape key
+document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') {
+        closeFeedbackModal();
+    }
+});
+
+// Submit feedback form
+document.getElementById('feedback-form').addEventListener('submit', (e) => {
+    e.preventDefault();
+
+    const name = document.getElementById('fb-name').value.trim();
+    const phone = document.getElementById('fb-phone').value.trim();
+    const email = document.getElementById('fb-email').value.trim();
+    const details = document.getElementById('fb-details').value.trim();
+
+    const subject = encodeURIComponent('[Google Ads Takeoff] Aduan / Maklum Balas dari ' + name);
+    const body = encodeURIComponent(
+        `Nama: ${name}\n` +
+        `Nombor Telefon: ${phone}\n` +
+        `Emel: ${email}\n\n` +
+        `Butiran Aduan / Maklum Balas:\n${details}`
+    );
+
+    window.location.href = `mailto:kbcimb@gmail.com?subject=${subject}&body=${body}`;
+
+    // Show confirmation
+    const btn = document.getElementById('btn-submit-feedback');
+    const origText = btn.textContent;
+    btn.textContent = currentLang === 'EN' ? '✅ Thank you!' : '✅ Terima kasih!';
+    btn.disabled = true;
+
+    setTimeout(() => {
+        btn.textContent = origText;
+        btn.disabled = false;
+        document.getElementById('feedback-form').reset();
+        closeFeedbackModal();
+    }, 3000);
+});
