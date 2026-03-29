@@ -193,6 +193,13 @@
                             <div class="hint" id="hint-target-number">How many clicks (or conversions) you want per month.</div>
                         </div>
 
+                        <!-- Product Price (for Margin Calculation) -->
+                        <div class="form-group" id="price-group" style="display:none;">
+                            <label for="product-price" id="lbl-product-price">🏷️ Product Price (RM)</label>
+                            <input type="number" id="product-price" min="1" step="0.01" placeholder="100.00" value="100.00">
+                            <div class="hint" id="hint-product-price">Used to calculate your Marketing Margin ROI.</div>
+                        </div>
+
                         <!-- Industry CPC Guide -->
                         <div class="form-group">
                             <label for="industry-type" id="lbl-industry-type">📋 Industry CPC Guide (Malaysia)</label>
@@ -255,6 +262,10 @@
                             <div class="result-row" id="res-conv-row" style="display:none;">
                                 <span class="result-label" id="res-lbl-conv">Est. Conversions / Month</span>
                                 <span class="result-value" id="res-conv">—</span>
+                            </div>
+                            <div class="result-row" id="res-margin-row" style="display:none;">
+                                <span class="result-label" id="res-lbl-margin" style="font-weight:600;">Marketing Margin (ROI)</span>
+                                <span class="result-value" id="res-margin" style="font-weight:bold;">—</span>
                             </div>
                         </div>
 

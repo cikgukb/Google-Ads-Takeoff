@@ -64,6 +64,9 @@ const dict = {
         resLblDaily: "Daily Budget",
         resLblClicks: "Est. Clicks / Month",
         resLblConv: "Est. Conversions / Month",
+        lblProductPrice: "🏷️ Product Price (RM)",
+        hintProductPrice: "Used to calculate your Marketing Margin ROI.",
+        lblMargin: "Marketing Margin (ROI)",
         benchmarkTitle: "📌 Industry Benchmarks",
         formulaTitle: "📐 Formulas Used",
         formulaClicks: "Budget = Target Clicks × CPC",
@@ -171,6 +174,9 @@ const dict = {
         resLblDaily: "Bajet Harian",
         resLblClicks: "Angg. Klik / Bulan",
         resLblConv: "Angg. Penukaran / Bulan",
+        lblProductPrice: "🏷️ Harga Produk (RM)",
+        hintProductPrice: "Digunakan untuk kira Marketing Margin ROI anda.",
+        lblMargin: "Marketing Margin (ROI)",
         benchmarkTitle: "📌 Penanda Aras Industri",
         formulaTitle: "📐 Formula Digunakan",
         formulaClicks: "Bajet = Sasaran Klik × CPC",
@@ -396,6 +402,9 @@ function switchLang(lang) {
     document.getElementById('res-lbl-daily').textContent = dict[lang].resLblDaily;
     document.getElementById('res-lbl-clicks').textContent = dict[lang].resLblClicks;
     document.getElementById('res-lbl-conv').textContent = dict[lang].resLblConv;
+    document.getElementById('lbl-product-price').textContent = dict[lang].lblProductPrice;
+    document.getElementById('hint-product-price').textContent = dict[lang].hintProductPrice;
+    document.getElementById('res-lbl-margin').textContent = dict[lang].lblMargin;
     document.getElementById('benchmark-title').textContent = dict[lang].benchmarkTitle;
     document.getElementById('formula-title').textContent = dict[lang].formulaTitle;
 
@@ -577,12 +586,19 @@ function updateTargetLabel() {
 
 // Show/hide conversion rate based on goal
 calcGoalSelect.addEventListener('change', () => {
+    const priceGroup = document.getElementById('price-group');
+    const resMarginRow = document.getElementById('res-margin-row');
+
     if (calcGoalSelect.value === 'conversions') {
         cvrGroup.style.display = 'block';
+        priceGroup.style.display = 'block';
         document.getElementById('res-conv-row').style.display = 'flex';
+        resMarginRow.style.display = 'flex';
     } else {
         cvrGroup.style.display = 'none';
+        priceGroup.style.display = 'none';
         document.getElementById('res-conv-row').style.display = 'none';
+        resMarginRow.style.display = 'none';
     }
     updateTargetLabel();
 });
@@ -606,6 +622,8 @@ function calculateBudget() {
     const target = parseFloat(targetNumberInput.value) || 0;
     const cpc = parseFloat(estCpcInput.value) || 0;
     const cvr = parseFloat(convRateInput.value) || 1;
+    const productPriceInput = document.getElementById('product-price');
+    const productPrice = parseFloat(productPriceInput.value) || 0;
 
     let monthlyBudget = 0;
     let clicks = 0;
@@ -628,6 +646,27 @@ function calculateBudget() {
     document.getElementById('res-daily').textContent = 'RM ' + dailyBudget.toFixed(2);
     document.getElementById('res-clicks').textContent = clicks.toLocaleString();
     document.getElementById('res-conv').textContent = conversions > 0 ? conversions.toLocaleString() : '—';
+    
+    // Marketing Margin Calculation
+    const resMargin = document.getElementById('res-margin');
+    if (goal === 'conversions' && productPrice > 0) {
+        const targetRevenue = conversions * productPrice;
+        const margin = (monthlyBudget / targetRevenue) * 100;
+        
+        if (margin <= 15) {
+            resMargin.style.color = '#22c55e'; // Green
+            resMargin.innerHTML = `${margin.toFixed(1)}% <span style="font-size:0.8rem">🟢</span>`;
+        } else if (margin <= 30) {
+            resMargin.style.color = '#f59e0b'; // Amber
+            resMargin.innerHTML = `${margin.toFixed(1)}% <span style="font-size:0.8rem">🟡</span>`;
+        } else {
+            resMargin.style.color = '#ef4444'; // Red
+            resMargin.innerHTML = `${margin.toFixed(1)}% <span style="font-size:0.8rem">🔴</span>`;
+        }
+    } else {
+        resMargin.textContent = '—';
+        resMargin.style.color = 'inherit';
+    }
 
     // Show explanation if display ads + conversions are chosen
     if (campaignTypeSelect.value === 'display' && goal === 'conversions') {
@@ -643,8 +682,8 @@ document.getElementById('btn-calculate').addEventListener('click', (e) => {
 });
 
 // Also auto-calculate on input change for real-time feedback
-[targetNumberInput, estCpcInput, convRateInput].forEach(el => {
-    el.addEventListener('input', calculateBudget);
+[targetNumberInput, estCpcInput, convRateInput, document.getElementById('product-price')].forEach(el => {
+    if (el) el.addEventListener('input', calculateBudget);
 });
 
 // ==================== AD COPY BUTTONS ====================
