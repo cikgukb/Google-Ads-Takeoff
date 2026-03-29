@@ -86,6 +86,11 @@ const dict = {
         optBoutique: "👗 Fashion Boutique",
         optBarber: "💈 Barber Shop",
         optTuition: "📚 Tuition Centre",
+        optTravel: "🧳 Travel Agent",
+        optKindergarten: "🏫 Kindergarten",
+        optOthers: "✨ Others / General",
+        lblAdIndustry: "💡 Need Idea? Select Industry",
+        hintAdIndustry: "Select your industry to reveal Path ideas.",
         // Feedback modal
         ftrFeedbackLink: "Complaints & Feedback",
         modalTitle: "📩 Complaints & Feedback",
@@ -188,6 +193,11 @@ const dict = {
         optBoutique: "👗 Butik Fesyen",
         optBarber: "💈 Kedai Barber",
         optTuition: "📚 Kelas Tuisyen",
+        optTravel: "🧳 Ejen Pelancongan",
+        optKindergarten: "🏫 Pengurus Tadika",
+        optOthers: "✨ Lain-lain / Umum",
+        lblAdIndustry: "💡 Kering Idea? Pilih Industri",
+        hintAdIndustry: "Pilih industri anda untuk melihat cadangan Path.",
         // Feedback modal
         ftrFeedbackLink: "Aduan & Maklum Balas",
         modalTitle: "📩 Aduan & Maklum Balas",
@@ -401,21 +411,28 @@ function switchLang(lang) {
     cgOpts[0].text = dict[lang].optClicks;
     cgOpts[1].text = dict[lang].optConversions;
 
-    // update industry guide
+    // update industry guides
     document.getElementById('lbl-industry-type').textContent = dict[lang].lblIndustryType;
     document.getElementById('hint-industry-type').textContent = dict[lang].hintIndustryType;
-    const indOpts = document.getElementById('industry-type').options;
-    indOpts[0].text = dict[lang].optSelectIndustry;
-    indOpts[1].text = dict[lang].optFood;
-    indOpts[2].text = dict[lang].optRealEstate;
-    indOpts[3].text = dict[lang].optInsurance;
-    indOpts[4].text = dict[lang].optUnitTrust;
-    indOpts[5].text = dict[lang].optHomestay;
-    indOpts[6].text = dict[lang].optCarWorkshop;
-    indOpts[7].text = dict[lang].optTailor;
-    indOpts[8].text = dict[lang].optBoutique;
-    indOpts[9].text = dict[lang].optBarber;
-    indOpts[10].text = dict[lang].optTuition;
+    document.getElementById('lbl-ad-industry').textContent = dict[lang].lblAdIndustry;
+    document.getElementById('hint-ad-industry').textContent = dict[lang].hintAdIndustry;
+
+    [document.getElementById('industry-type').options, document.getElementById('ad-industry-type').options].forEach(opts => {
+        opts[0].text = dict[lang].optSelectIndustry;
+        opts[1].text = dict[lang].optFood;
+        opts[2].text = dict[lang].optRealEstate;
+        opts[3].text = dict[lang].optInsurance;
+        opts[4].text = dict[lang].optUnitTrust;
+        opts[5].text = dict[lang].optHomestay;
+        opts[6].text = dict[lang].optCarWorkshop;
+        opts[7].text = dict[lang].optTailor;
+        opts[8].text = dict[lang].optBoutique;
+        opts[9].text = dict[lang].optBarber;
+        opts[10].text = dict[lang].optTuition;
+        opts[11].text = dict[lang].optTravel;
+        opts[12].text = dict[lang].optKindergarten;
+        opts[13].text = dict[lang].optOthers;
+    });
 
     // update target label based on current goal
     updateTargetLabel();
@@ -424,6 +441,7 @@ function switchLang(lang) {
     document.getElementById('ftr-feedback-link').textContent = dict[lang].ftrFeedbackLink;
 
     updatePreview();
+    renderPathSuggestions(); // re-render pills if any
 }
 
 // ==================== TAB SWITCHING ====================
@@ -463,8 +481,74 @@ const industryCpcData = {
     tailor:       { cpc: 1.50,  range: 'RM 0.80 – 3.00 (avg RM 1.50)' },
     boutique:     { cpc: 2.00,  range: 'RM 1.00 – 5.00 (avg RM 2.00)' },
     barber:       { cpc: 1.50,  range: 'RM 0.80 – 3.00 (avg RM 1.50)' },
-    tuition:      { cpc: 3.50,  range: 'RM 2.00 – 8.00 (avg RM 3.50)' }
+    tuition:      { cpc: 3.50,  range: 'RM 2.00 – 8.00 (avg RM 3.50)' },
+    travel:       { cpc: 2.00,  range: 'RM 1.00 – 4.00 (avg RM 2.00)' },
+    kindergarten: { cpc: 2.50,  range: 'RM 1.00 – 5.00 (avg RM 2.50)' },
+    others:       { cpc: 1.50,  range: 'RM 1.00 – 3.00 (avg RM 1.50)' }
 };
+
+// Path Suggestions Data
+const pathSuggestionsData = {
+    EN: {
+        food:         [['Promo', 'Combo'], ['Menu', 'Tasty'], ['Order', 'Now']],
+        realestate:   [['House', 'New'], ['Project', 'Terrace'], ['Viewing', 'Free']],
+        insurance:    [['Plan', 'Family'], ['Quote', 'Free'], ['Medical', 'Card']],
+        unittrust:    [['Fund', 'Invest'], ['Save', 'Today'], ['Dividend', 'High']],
+        homestay:     [['Book', 'Now'], ['Pool', 'Swim'], ['Package', 'Holiday']],
+        carworkshop:  [['Service', 'Car'], ['Oil', 'Change'], ['Mechanic', 'Expert']],
+        tailor:       [['Clothes', 'Raya'], ['Tailor', 'Early'], ['Stitch', 'Neat']],
+        boutique:     [['Hijab', 'Bawal'], ['Collection', 'New'], ['Discount', '20Percent']],
+        barber:       [['Cut', 'Hair'], ['Fade', 'Expert'], ['Slot', 'Limited']],
+        tuition:      [['Register', 'Now'], ['Class', 'Online'], ['Subject', 'Core']],
+        travel:       [['Package', 'Holiday'], ['Ticket', 'Cheap'], ['Tour', 'Best']],
+        kindergarten: [['Pre', 'School'], ['Intake', '2024'], ['Kids', 'Smart']],
+        others:       [['Promo', 'Special'], ['Offer', 'Limited'], ['Sale', 'Cheap']]
+    },
+    MS: {
+        food:         [['Promo', 'Kombo'], ['Menu', 'Sedap'], ['Order', 'Sekarang']],
+        realestate:   [['Rumah', 'Baru'], ['Projek', 'Teres'], ['Viewing', 'Percuma']],
+        insurance:    [['Pelan', 'Keluarga'], ['Sebut', 'Harga'], ['Medikal', 'Kad']],
+        unittrust:    [['Dana', 'Labur'], ['Simpan', 'HariIni'], ['Dividen', 'Tinggi']],
+        homestay:     [['Tempah', 'Sekarang'], ['Kolam', 'Renang'], ['Pakej', 'Cuti']],
+        carworkshop:  [['Servis', 'Kereta'], ['Tukar', 'Minyak'], ['Pomen', 'Pakar']],
+        tailor:       [['Baju', 'Raya'], ['Tempah', 'Awal'], ['Jahitan', 'Kemas']],
+        boutique:     [['Tudung', 'Bawal'], ['Koleksi', 'Terbaru'], ['Khas', '20Peratus']],
+        barber:       [['Potong', 'Rambut'], ['Fade', 'Pakar'], ['Slot', 'Terhad']],
+        tuition:      [['Daftar', 'Segera'], ['Kelas', 'Online'], ['Subjek', 'Teras']],
+        travel:       [['Pakej', 'Cuti'], ['Tiket', 'Murah'], ['Travel', 'Selesa']],
+        kindergarten: [['Pra', 'Sekolah'], ['Kemasukan', '2024'], ['Tadika', 'Islamik']],
+        others:       [['Promo', 'Istimewa'], ['Tawaran', 'Terhad'], ['Jualan', 'Murah']]
+    }
+};
+
+// Ad Copy Industry selector logic
+const adIndustrySelect = document.getElementById('ad-industry-type');
+const pathSuggestionsContainer = document.getElementById('path-suggestions');
+
+adIndustrySelect.addEventListener('change', renderPathSuggestions);
+
+function renderPathSuggestions() {
+    pathSuggestionsContainer.innerHTML = '';
+    const selected = adIndustrySelect.value;
+    if (selected === 'custom') return;
+
+    const suggestions = pathSuggestionsData[currentLang][selected];
+    if (suggestions) {
+        suggestions.forEach(pair => {
+            const btn = document.createElement('button');
+            btn.type = 'button';
+            btn.className = 'path-pill';
+            btn.innerHTML = `📝 ${pair[0]} / ${pair[1]}`;
+            btn.addEventListener('click', () => {
+                inputs.path1.value = pair[0];
+                inputs.path2.value = pair[1];
+                updateCounts();
+                updatePreview();
+            });
+            pathSuggestionsContainer.appendChild(btn);
+        });
+    }
+}
 
 // Industry selector logic
 industrySelect.addEventListener('change', () => {

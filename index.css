@@ -208,6 +208,37 @@ textarea {
     color: #a78bfa; /* Slightly highlighted tooltips */
 }
 
+/* Path Suggestions */
+.path-suggestions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.6rem;
+    margin-top: -0.5rem;
+    margin-bottom: 1.25rem;
+}
+
+.path-pill {
+    background: rgba(59, 130, 246, 0.15);
+    border: 1px solid rgba(59, 130, 246, 0.4);
+    color: #93c5fd;
+    padding: 0.4rem 0.8rem;
+    border-radius: 20px;
+    font-size: 0.8rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    display: flex;
+    align-items: center;
+    gap: 0.3rem;
+    font-family: inherit;
+}
+
+.path-pill:hover {
+    background: rgba(59, 130, 246, 0.3);
+    color: #fff;
+    transform: translateY(-1px);
+}
+
 /* Action Buttons */
 .action-buttons {
     display: flex;

@@ -54,6 +54,28 @@
 
                     <form id="ad-form">
                         
+                        <!-- Industry Ideas -->
+                        <div class="form-group">
+                            <label for="ad-industry-type" id="lbl-ad-industry">Industry Path Ideas</label>
+                            <select id="ad-industry-type">
+                                <option value="custom">— Select your industry —</option>
+                                <option value="food">🍱 Ready-to-Eat / F&B</option>
+                                <option value="realestate">🏠 Real Estate Negotiator</option>
+                                <option value="insurance">🛡️ Insurance Agent</option>
+                                <option value="unittrust">📈 Unit Trust Agent</option>
+                                <option value="homestay">🏡 Homestay</option>
+                                <option value="carworkshop">🔧 Car Workshop</option>
+                                <option value="tailor">🧵 Tailor</option>
+                                <option value="boutique">👗 Fashion Boutique</option>
+                                <option value="barber">💈 Barber Shop</option>
+                                <option value="tuition">📚 Tuition Centre</option>
+                                <option value="travel">🧳 Travel Agent</option>
+                                <option value="kindergarten">🏫 Kindergarten Manager</option>
+                                <option value="others">✨ Others / General</option>
+                            </select>
+                            <div class="hint" id="hint-ad-industry">Select to auto-fill Path 1 and Path 2 ideas.</div>
+                        </div>
+
                         <!-- URL Section -->
                         <div class="form-group">
                             <label for="final-url" id="lbl-final-url">Final URL</label>
@@ -71,6 +93,7 @@
                                 <input type="text" id="path-2" maxlength="15" placeholder="Promo">
                             </div>
                         </div>
+                        <div id="path-suggestions" class="path-suggestions"></div>
 
                         <!-- Headlines Section -->
                         <div class="form-group">
@@ -185,6 +208,9 @@
                                 <option value="boutique">👗 Butik Fesyen</option>
                                 <option value="barber">💈 Kedai Barber</option>
                                 <option value="tuition">📚 Kelas Tuisyen</option>
+                                <option value="travel">🧳 Ejen Pelancongan</option>
+                                <option value="kindergarten">🏫 Pengurus Tadika</option>
+                                <option value="others">✨ Lain-lain / Umum</option>
                             </select>
                             <div class="hint" id="hint-industry-type">Select your industry to auto-fill the estimated CPC.</div>
                             <div class="industry-cpc-info" id="industry-cpc-info" style="display:none;">
