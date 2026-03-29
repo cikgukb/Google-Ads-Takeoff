@@ -69,6 +69,9 @@ const dict = {
         formulaClicks: "Budget = Target Clicks × CPC",
         formulaConv: "Budget = (Target Conversions ÷ CVR) × CPC",
         formulaDaily: "Monthly Budget ÷ 30.4",
+        explainTitle: "⚠️ Why is this budget so high?",
+        explainDesc1: "Display Ads typically have a very low Conversion Rate (0.5% - 1.0%) compared to Search Ads.",
+        explainDesc2: "This means you need a massive amount of clicks (traffic volume) just to hit your target, driving the total cost up.",
         // Industry guide
         lblIndustryType: "📋 Industry CPC Guide (Malaysia)",
         hintIndustryType: "Select your industry to auto-fill the estimated CPC.",
@@ -168,6 +171,9 @@ const dict = {
         formulaClicks: "Bajet = Sasaran Klik × CPC",
         formulaConv: "Bajet = (Sasaran Penukaran ÷ CVR) × CPC",
         formulaDaily: "Bajet Bulanan ÷ 30.4",
+        explainTitle: "⚠️ Kenapa Anggaran Menjadi Tinggi?",
+        explainDesc1: "Display Ads biasanya mempunyai Kadar Penukaran (CVR) yang sangat rendah (0.5% - 1.0%) berbanding Search Ads.",
+        explainDesc2: "Ini bermakna anda perlukan jumlah klik yang sangat banyak untuk menyaring pembeli, menjadikan kos keseluruhan melambung.",
         // Industry guide
         lblIndustryType: "📋 Panduan CPC Mengikut Industri (Malaysia)",
         hintIndustryType: "Pilih industri anda untuk auto-isi anggaran CPC.",
@@ -383,6 +389,10 @@ function switchLang(lang) {
     document.getElementById('benchmark-title').textContent = dict[lang].benchmarkTitle;
     document.getElementById('formula-title').textContent = dict[lang].formulaTitle;
 
+    document.getElementById('explain-title').textContent = dict[lang].explainTitle;
+    document.getElementById('explain-desc1').textContent = dict[lang].explainDesc1;
+    document.getElementById('explain-desc2').textContent = dict[lang].explainDesc2;
+
     // update select options
     const ctOpts = document.getElementById('campaign-type').options;
     ctOpts[0].text = dict[lang].optSearch;
@@ -534,6 +544,13 @@ function calculateBudget() {
     document.getElementById('res-daily').textContent = 'RM ' + dailyBudget.toFixed(2);
     document.getElementById('res-clicks').textContent = clicks.toLocaleString();
     document.getElementById('res-conv').textContent = conversions > 0 ? conversions.toLocaleString() : '—';
+
+    // Show explanation if display ads + conversions are chosen
+    if (campaignTypeSelect.value === 'display' && goal === 'conversions') {
+        document.getElementById('explanation-card').style.display = 'block';
+    } else {
+        document.getElementById('explanation-card').style.display = 'none';
+    }
 }
 
 document.getElementById('btn-calculate').addEventListener('click', (e) => {
